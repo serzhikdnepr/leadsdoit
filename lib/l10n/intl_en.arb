@@ -1,0 +1,13 @@
+{
+  "network_exception": "network_exception",
+  "titleApp": "Github repos list",
+  "search": "Search",
+  "whatWeHaveFound": "What we have found",
+  "whatWeFound": "What we found",
+  "emptyFound": "Nothing was find for your search.\nPlease check the spelling",
+  "searchHistory": "Search History",
+  "emptyHistory": "You have empty history.\nClick on search to start journey!",
+  "listOfFavoriteRepositories": "Favorite repos list",
+  "emptyFavoriteList": "You have no favorites.\nClick on star while searching to add first favorite",
+  "exceededFavorite": "The number of saved repositories has been exceeded"
+}
