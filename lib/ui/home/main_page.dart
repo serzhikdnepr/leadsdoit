@@ -146,15 +146,8 @@ class _HomePageState extends WidgetSate<HomePage, HomeBloc> {
                                       ? RepositoriesList(
                                           repositories: _repositories!,
                                           clickFavoriteBtn: (isFavorite, item) {
-                                            isFavorite
-                                                ? (Constants.countFavorites >
-                                                        _ids.length)
-                                                    ? bloc.addFavorite(item)
-                                                    : showToast(S
-                                                        .of(context)
-                                                        .exceededFavorite)
-                                                : bloc.deleteFavorite(
-                                                    item.id ?? 0);
+                                            addOrDeleteFavorite(
+                                                isFavorite, item);
                                           },
                                           favoriteIds: _ids)
                                       : Center(
@@ -184,31 +177,13 @@ class _HomePageState extends WidgetSate<HomePage, HomeBloc> {
                               Expanded(
                                   child: _repositoriesHistory != null &&
                                           _repositoriesHistory!.isNotEmpty
-                                      ? ListView.separated(
-                                          itemCount:
-                                              _repositoriesHistory!.length,
-                                          padding: EdgeInsets.all(
-                                              ScreenUtil().setHeight(16)),
-                                          shrinkWrap: true,
-                                          itemBuilder: (context, index) {
-                                            return RepositoryItemView(
-                                              repositoryItem:
-                                                  _repositoriesHistory![index],
-                                              clickFavoriteBtn:
-                                                  (bool isFavorite) {},
-                                            );
+                                      ? RepositoriesList(
+                                          repositories: _repositoriesHistory!,
+                                          clickFavoriteBtn: (isFavorite, item) {
+                                            addOrDeleteFavorite(
+                                                isFavorite, item);
                                           },
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                  int index) {
-                                            return Divider(
-                                              color: Colors.transparent,
-                                              height: ScreenUtil().setWidth(8),
-                                              thickness:
-                                                  ScreenUtil().setWidth(8),
-                                            );
-                                          },
-                                        )
+                                          favoriteIds: _ids)
                                       : Center(
                                           child: Text(
                                             S.of(context).emptyHistory,
@@ -222,5 +197,17 @@ class _HomePageState extends WidgetSate<HomePage, HomeBloc> {
             );
           }),
     );
+  }
+
+  void addOrDeleteFavorite(bool isFavorite, RepositoryItem item) {
+    isFavorite
+        ? (Constants.countFavorites >
+        _ids.length)
+        ? bloc.addFavorite(item)
+        : showToast(S
+        .of(context)
+        .exceededFavorite)
+        : bloc.deleteFavorite(
+        item.id ?? 0);
   }
 }
